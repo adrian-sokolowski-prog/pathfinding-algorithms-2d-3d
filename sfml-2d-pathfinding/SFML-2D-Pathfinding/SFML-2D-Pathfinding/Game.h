@@ -3,11 +3,12 @@
 
 #include "SceneManager.h"
 #include "SceneBFS.h"
+#include "Globals.h"
 
 class Game
 {
 public:
-	Game() : m_window(sf::VideoMode({800,600}), "SFML Pathfinding") {};
+	Game() : m_window(sf::VideoMode({Globals::SCREEN_WIDTH,Globals::SCREEN_HEIGHT}), "SFML Pathfinding") {};
 	~Game() {};
 
 	void Run();
