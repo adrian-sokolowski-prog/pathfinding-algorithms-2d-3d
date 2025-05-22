@@ -1,8 +1,8 @@
 #include "GridCell.h"
 #include "Globals.h"
 
-GridCell::GridCell(sf::Color t_color, bool t_isWalkable, sf::Vector2f t_position)
-	: m_isWalkable(t_isWalkable)
+GridCell::GridCell(sf::Color t_color, bool t_isWalkable, sf::Vector2f t_position, sf::Vector2i t_index)
+	: m_isWalkable(t_isWalkable), m_index(t_index)
 {
     sf::Vector2f centerPos = t_position + (Globals::CELL_SIZE / 2.f);
     m_cellOrigin = centerPos;
@@ -12,11 +12,6 @@ GridCell::GridCell(sf::Color t_color, bool t_isWalkable, sf::Vector2f t_position
 
     m_cellShape.setSize(sf::Vector2f(Globals::CELL_SIZE));
     m_cellShape.setFillColor(t_color);
-}
-
-GridCell& GridCell::GetCell()
-{
-	return *this;
 }
 
 void GridCell::RenderCell(sf::RenderWindow& t_window) const

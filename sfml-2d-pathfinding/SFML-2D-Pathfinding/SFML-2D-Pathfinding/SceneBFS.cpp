@@ -20,10 +20,7 @@ void SceneBFS::ProcessEvents(const std::optional<sf::Event> t_event, sf::RenderW
 	if(!t_event.has_value())
 		return;
 
-	if (t_event->is<sf::Event::MouseButtonPressed>())
-	{
-		EventHandler eventHandler = EventHandler(t_window, m_grid);
-		t_event->visit(eventHandler);
-	}
+	EventHandler eventHandler = EventHandler(t_window, m_grid);
+	t_event->visit(eventHandler);
 	
 }

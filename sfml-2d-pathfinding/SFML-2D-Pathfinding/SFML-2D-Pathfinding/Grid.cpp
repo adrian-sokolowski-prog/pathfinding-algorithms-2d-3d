@@ -1,15 +1,16 @@
 #include "Grid.h"
 #include "Globals.h"
 #include "Collision.h"
+#include "BFS.h"
 
 Grid::Grid()
 {
 	// Row Major Order ( column (x), row (y) )
-	for (int row = 0; row < Globals::CELL_AMOUNT.y; ++row)
+	for (int y = 0; y < Globals::CELL_AMOUNT.y; ++y)
 	{
-		for (int column = 0; column < Globals::CELL_AMOUNT.x; ++column)
+		for (int x = 0; x < Globals::CELL_AMOUNT.x; ++x)
 		{
-			m_grid.emplace_back(GridCell(sf::Color::White,true,createCellPosition(column, row)));
+			m_grid.emplace_back(GridCell(sf::Color::White,true,createCellPosition(x, y),sf::Vector2i{x,y}));
 		}
 	}
 }
@@ -37,6 +38,21 @@ void Grid::UpdateGridCell(sf::Vector2i t_mousePosition)
 	switch (m_keyboardPressMode)
 	{
 	case InputType::KeyboardPressMode::StartStop:
+		switch (m_mouseClickMode)
+		{
+		case InputType::MouseClickMode::Left:
+			m_grid[getGridIndexFromMouse(t_mousePosition)].SetIfWalkable(true);
+			m_grid[getGridIndexFromMouse(t_mousePosition)].SetColor(sf::Color::Red);
+			m_startCell = &m_grid[getGridIndexFromMouse(t_mousePosition)];
+			break;
+		case InputType::MouseClickMode::Right:
+			m_grid[getGridIndexFromMouse(t_mousePosition)].SetIfWalkable(true);
+			m_grid[getGridIndexFromMouse(t_mousePosition)].SetColor(sf::Color::Magenta);
+			m_endCell = &m_grid[getGridIndexFromMouse(t_mousePosition)];
+			break;
+		case InputType::MouseClickMode::None:
+			break;
+		}
 		break;
 	case InputType::KeyboardPressMode::Wall:
 		switch (m_mouseClickMode)
@@ -56,9 +72,20 @@ void Grid::UpdateGridCell(sf::Vector2i t_mousePosition)
 	}
 }
 
-sf::Vector2f Grid::createCellPosition(int t_column, int t_row)
+void Grid::StartBFSAlgorithm()
 {
-	sf::Vector2f nextCellPosition = sf::Vector2f(t_column * Globals::CELL_SIZE.x, t_row * Globals::CELL_SIZE.y);
+	BFS bfs(*m_startCell, *m_endCell,m_grid);
+
+	std::vector<GridCell*> path = bfs.GetPath();
+	for (GridCell* cell : path)
+	{
+		cell->SetColor(sf::Color::Green);
+	}
+}
+
+sf::Vector2f Grid::createCellPosition(int t_x, int t_y)
+{
+	sf::Vector2f nextCellPosition = sf::Vector2f(t_x * Globals::CELL_SIZE.x, t_y * Globals::CELL_SIZE.y);
 	return nextCellPosition;
 }
 
@@ -69,7 +96,8 @@ int Grid::getGridIndexFromMouse(sf::Vector2i t_mousePosition)
 	return get1DGridIndexFrom2DIndex(gridCellX, gridCellY);
 }
 
-int Grid::get1DGridIndexFrom2DIndex(int t_column, int t_row)
+int Grid::get1DGridIndexFrom2DIndex(int t_x, int t_y)
 {
-	return (t_row * Globals::CELL_AMOUNT.x) + t_column;
+	// Multiply rows by column amount and add column index to get 1d Index
+	return (t_y * Globals::CELL_AMOUNT.x) + t_x;
 }

@@ -19,6 +19,12 @@
     <Filter Include="Source Files\Scenes">
       <UniqueIdentifier>{54054c00-843c-4515-8349-64b6037ddac8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Algorithms">
+      <UniqueIdentifier>{0dc264ed-d3c8-48a6-91e8-ea80ae5079f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Algorithms">
+      <UniqueIdentifier>{4b2038f6-8539-452b-aa8e-703bfbb5ac73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -38,6 +44,9 @@
     </ClCompile>
     <ClCompile Include="EventHandler.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BFS.cpp">
+      <Filter>Source Files\Algorithms</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +78,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Collision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BFS.h">
+      <Filter>Header Files\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

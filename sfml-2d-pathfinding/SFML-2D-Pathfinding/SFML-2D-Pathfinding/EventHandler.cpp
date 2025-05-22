@@ -22,3 +22,19 @@ void EventHandler::operator()(const sf::Event::MouseButtonPressed& t_event)
 		}
 	}
 }
+
+void EventHandler::operator()(const sf::Event::KeyPressed& t_event)
+{
+	if (t_event.code == sf::Keyboard::Key::B)
+	{
+		m_grid.ChangeKeyboardMode(InputType::KeyboardPressMode::StartStop);
+	}
+	else if (t_event.code == sf::Keyboard::Key::W)
+	{
+		m_grid.ChangeKeyboardMode(InputType::KeyboardPressMode::Wall);
+	}
+	else if (t_event.code == sf::Keyboard::Key::G)
+	{
+		m_grid.StartBFSAlgorithm();
+	}
+}

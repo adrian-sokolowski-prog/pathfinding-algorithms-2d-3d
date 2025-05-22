@@ -35,12 +35,9 @@ void Game::processEvents()
 {
     while (const std::optional event = m_window.pollEvent())
     {
-        SceneManager::Instance().ProcessCurrentSceneEvents(event, m_window);
+        if (event->is<sf::Event::Closed>()){ m_window.close(); }
 
-        if (event->is<sf::Event::Closed>())
-        {
-            m_window.close();
-        }
+        SceneManager::Instance().ProcessCurrentSceneEvents(event, m_window);
     }
 }
 

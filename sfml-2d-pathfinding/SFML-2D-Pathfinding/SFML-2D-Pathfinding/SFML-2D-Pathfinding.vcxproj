@@ -129,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BFS.cpp" />
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Grid.cpp" />
@@ -137,6 +138,7 @@
     <ClCompile Include="SceneBFS.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BFS.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="Game.h" />
@@ -144,6 +146,7 @@
     <ClInclude Include="Grid.h" />
     <ClInclude Include="GridCell.h" />
     <ClInclude Include="InputTypes.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneBFS.h" />
     <ClInclude Include="SceneManager.h" />

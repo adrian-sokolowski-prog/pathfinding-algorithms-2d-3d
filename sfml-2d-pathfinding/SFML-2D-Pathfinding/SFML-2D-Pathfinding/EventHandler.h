@@ -11,6 +11,8 @@ public:
 
 	void operator()(const sf::Event::MouseButtonPressed& t_event);
 
+	void operator()(const sf::Event::KeyPressed& t_event);
+
 	// Generic catch all for unused events
 	template <typename T>
 	void operator()(const T&) const {}
@@ -18,5 +20,4 @@ public:
 private:
 	sf::RenderWindow& m_window;
 	Grid& m_grid;
-
 };
